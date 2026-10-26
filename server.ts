@@ -17,7 +17,7 @@ let pythonProcess: ChildProcess | null = null;
 
 function startPythonBackend() {
   console.log('[Server] Spawning Python FastAPI backend on port 5050...');
-  pythonProcess = spawn('python3', ['-m', 'backend.app.main'], {
+  pythonProcess = spawn(process.platform === 'win32' ? 'python' : 'python3', ['-m', 'backend.app.main'], {
     cwd: __dirname,
     stdio: 'inherit',
     env: { ...process.env, PYTHONPATH: __dirname }

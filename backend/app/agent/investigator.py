@@ -4,6 +4,7 @@ import uuid
 import cv2
 import numpy as np
 from typing import Dict, Any, List, Tuple
+from backend.app.ai.featherless import enhance_region_notes, generate_audit_summary
 
 from backend.app.schemas.audit_schema import (
     AuditResponse,
@@ -289,6 +290,18 @@ class ShelfAuditorAgent:
                     notes = "Edge density preserved but localized visual signature shifted. Possible product displacement or substitution."
                     confidence = 0.82
 
+                # Enhance notes with Featherless AI (falls back to static notes if unavailable)
+                ai_notes = enhance_region_notes(
+                    classification=classification,
+                    area_percent=reg["area_percent"],
+                    mean_intensity_delta=reg["mean_intensity_delta"],
+                    edge_ratio=edge_ratio,
+                    bhattacharyya=bhattacharyya,
+                    solidity=reg["solidity"],
+                )
+                if ai_notes:
+                    notes = ai_notes
+
                 # Save crop artifact
                 crop_bgr = extract_region_crop(aligned_curr_bgr, reg)
                 crop_filename = f"crop_{audit_id}_{reg['region_id']}.jpg"
@@ -374,6 +387,18 @@ class ShelfAuditorAgent:
             termination_reason = TerminationReason.AUDIT_COMPLETED_CHANGES_DETECTED
             human_review_required = False
             summary = f"Shelf audit complete. Identified {len(final_changed_regions)} distinct visual variations across {overall_change_pct:.2f}% of the shelf surface."
+
+        # Enhance summary with Featherless AI (falls back to static summary if unavailable)
+        ai_summary = generate_audit_summary(
+            n_changes=len(final_changed_regions),
+            overall_change_pct=overall_change_pct,
+            ssim=final_ssim,
+            psnr=final_psnr,
+            has_uncertain=has_uncertain_regions,
+            classifications=[r.classification for r in final_changed_regions],
+        )
+        if ai_summary:
+            summary = ai_summary
 
         exec_time = round((time.perf_counter() - start_time) * 1000, 2)
 
