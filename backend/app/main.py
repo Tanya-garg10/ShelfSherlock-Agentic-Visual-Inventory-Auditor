@@ -1,4 +1,5 @@
 import os
+import sys
 import cv2
 import time
 from fastapi import FastAPI
@@ -45,7 +46,7 @@ def health_check():
         "status": "HEALTHY",
         "service": "ShelfSherlock Agentic Auditor",
         "opencv_version": cv2.__version__,
-        "python_version": os.sys.version.split(" ")[0],
+        "python_version": sys.version.split(" ")[0],
         "artifacts_directory": ARTIFACTS_DIR,
         "uptime_seconds": round(time.time() - start_timestamp, 2)
     }

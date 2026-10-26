@@ -16,7 +16,7 @@ const isProd = process.env.NODE_ENV === 'production';
 let pythonProcess: ChildProcess | null = null;
 
 function startPythonBackend() {
-  console.log('[Server] Spawning Python FastAPI backend on port 8000...');
+  console.log('[Server] Spawning Python FastAPI backend on port 5050...');
   pythonProcess = spawn('python3', ['-m', 'backend.app.main'], {
     cwd: __dirname,
     stdio: 'inherit',

@@ -328,7 +328,7 @@ class ShelfAuditorAgent:
         # Generate Heatmap
         heatmap_img = generate_heatmap(diff_map, aligned_curr_bgr)
         # Generate Annotated Overlay using Pydantic v2 model_dump
-        annotated_img = annotate_shelf_image(aligned_curr_bgr, [r.model_dump()["box"] | {"region_id": r.region_id, "area_percent": r.area_percent, "classification": r.classification} for r in final_changed_regions])
+        annotated_img = annotate_shelf_image(aligned_curr_bgr, [{"x": r.box.x, "y": r.box.y, "width": r.box.width, "height": r.box.height, "region_id": r.region_id, "area_percent": r.area_percent, "classification": r.classification} for r in final_changed_regions])
 
         # Save artifacts
         ref_filename = f"ref_{audit_id}.jpg"

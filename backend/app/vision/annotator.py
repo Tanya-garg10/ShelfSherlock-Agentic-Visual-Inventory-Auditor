@@ -38,7 +38,7 @@ def annotate_shelf_image(
         if "void" in classification or "change" in classification:
             box_color = (49, 88, 201) # Cobalt
         elif "uncertain" in classification:
-            box_color = (34, 139, 217) # Amber
+            box_color = (34, 139, 217) # Cornflower Blue
         else:
             box_color = (60, 160, 60) # Muted green
 
