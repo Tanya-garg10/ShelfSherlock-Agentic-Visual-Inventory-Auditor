@@ -5,8 +5,6 @@
 
 ShelfSherlock is an autonomous visual auditing platform designed for retail planogram compliance and out-of-stock discovery. Rather than relying on static comparisons or hallucinating language models, ShelfSherlock couples sub-pixel computer vision (**OpenCV 5.0.0**) with a deterministic, bounded decision loop and an editorial React interface.
 
----
-
 ## 1. Verified Technology Stack
 
 - **Computer Vision Core**: OpenCV 5.0.0 (`opencv-python==5.0.0.93`), NumPy 2.4, Pillow 13.0
@@ -14,8 +12,6 @@ ShelfSherlock is an autonomous visual auditing platform designed for retail plan
 - **Full-Stack Orchestration**: Express 4.21, TypeScript 7.0, `http-proxy-middleware`
 - **Frontend Interface**: React 19, Vite 8, Tailwind CSS v4, Motion (Framer Motion 12), Lucide React
 - **Test Framework**: Pytest 9.1, HTTPX 0.28
-
----
 
 ## 2. Quickstart & Local Setup
 
@@ -56,8 +52,6 @@ npm run dev
 
 Open `http://localhost:3000` in your browser. Express starts on port 3000, automatically spawns the FastAPI backend on port 5050, and proxies all API endpoints seamlessly.
 
----
-
 ## 3. API Contract
 
 ### `GET /health`
@@ -90,8 +84,6 @@ Returns structured `AuditResponse` JSON containing:
 - `investigation_trace`: Ordered list of executed steps with observations, rationales, and OpenCV tool metrics.
 - `artifacts`: URLs for reference, aligned current, annotated overlay, difference map, and thermal heatmap.
 
----
-
 ## 4. Experiences Overview
 
 - **Experience A — Introduction**: Full-screen opening narrative with architectural scanning line and skippable navigation.
@@ -99,8 +91,6 @@ Returns structured `AuditResponse` JSON containing:
 - **Experience C — Audit Workspace**: Dual-panel drag-and-drop file upload, live dimensions decoder, and one-click bundled benchmark loader.
 - **Experience D — Visual Evidence**: Multi-layer viewer including an interactive Before/After comparison slider, thermal heatmaps, high-resolution evidence crops, and human decision buttons.
 - **Experience E — Agentic Investigation**: Transparent, ordered execution log detailing every OpenCV operation and measurement that dictated the final termination state.
-
----
 
 ## 5. Documentation Directory
 
