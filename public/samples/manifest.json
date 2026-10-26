@@ -1,0 +1,43 @@
+{
+  "dataset_name": "ShelfSherlock Controlled Retail Audit Benchmark",
+  "description": "Reproducible synthetic shelf test pairs for computer vision evaluation and agent verification",
+  "opencv_version_generated": "5.0.0",
+  "cases": [
+    {
+      "case_id": "case_1_nominal",
+      "name": "Nominal / Identical Planogram",
+      "reference": "sample_1_ref_nominal.jpg",
+      "current": "sample_1_curr_nominal.jpg",
+      "expected_outcome": "AUDIT_COMPLETED_NO_CHANGES",
+      "ground_truth_changes": 0,
+      "description": "Identical product arrangement with realistic sensor noise. Tests false-positive suppression."
+    },
+    {
+      "case_id": "case_2_vacancies",
+      "name": "Confirmed Shelf Vacancies (Out of Stock)",
+      "reference": "sample_2_ref_full.jpg",
+      "current": "sample_2_curr_vacancies.jpg",
+      "expected_outcome": "AUDIT_COMPLETED_CHANGES_DETECTED",
+      "ground_truth_changes": 2,
+      "description": "Two distinct products removed (Tea/Soy slot and Tonic slot). Tests structural void detection."
+    },
+    {
+      "case_id": "case_3_shifted",
+      "name": "Rigid Camera Displacement & Slight Tilt",
+      "reference": "sample_3_ref_aligned.jpg",
+      "current": "sample_3_curr_shifted.jpg",
+      "expected_outcome": "AUDIT_COMPLETED_NO_CHANGES",
+      "ground_truth_changes": 0,
+      "description": "12px horizontal translation and 0.6 degree tilt. Tests ECC planar alignment recovery."
+    },
+    {
+      "case_id": "case_4_ambiguous_glare",
+      "name": "Ambiguous Specular Glare & Displaced Item",
+      "reference": "sample_4_ref_standard.jpg",
+      "current": "sample_4_curr_glare_ambiguous.jpg",
+      "expected_outcome": "AMBIGUOUS_FEATURES_HUMAN_REVIEW",
+      "ground_truth_changes": 1,
+      "description": "Heavy diagonal lighting reflection and slightly shifted item. Tests agentic escalation to human review."
+    }
+  ]
+}

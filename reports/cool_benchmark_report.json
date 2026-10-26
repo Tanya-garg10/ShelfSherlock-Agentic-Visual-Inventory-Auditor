@@ -1,0 +1,33 @@
+{
+  "benchmark_timestamp": "2026-10-26T14:59:55Z",
+  "system_information": {
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
+    "cpu_architecture": "x86_64",
+    "processor": "x86_64 CPU",
+    "python_version": "3.11.2",
+    "opencv_version": "5.0.0"
+  },
+  "cool_evaluation": {
+    "status": "UNVERIFIED_NON_ARM64",
+    "is_graviton_arm64": false,
+    "supported_aws_instances": [
+      "c7g (Graviton3)",
+      "c8g (Graviton4)",
+      "m7g",
+      "r7g"
+    ],
+    "cool_acceleration_component": "KleidiCV 0.7.0 / ARMPL Neoverse SIMD",
+    "verification_summary": "Host environment is x86_64 (x86_64). Cloud-Optimized OpenCV Library (COOL) requires an AWS Graviton (aarch64) instance with KleidiCV 0.7.0. COOL integration is properly architected but remains UNVERIFIED in this x86_64 container."
+  },
+  "baseline_opencv5_measurements": {
+    "iterations_measured": 25,
+    "warmup_iterations": 5,
+    "image_dimensions": "960x640",
+    "median_latency_ms": 6.647,
+    "mean_latency_ms": 7.856,
+    "p95_latency_ms": 8.985,
+    "min_latency_ms": 5.752,
+    "max_latency_ms": 34.464,
+    "throughput_fps": 150.4
+  }
+}

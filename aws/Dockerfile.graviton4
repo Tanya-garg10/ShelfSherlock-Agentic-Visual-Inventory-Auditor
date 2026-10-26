@@ -1,0 +1,39 @@
+# AWS Graviton4 (ARM64 / aarch64) Production Dockerfile for ShelfSherlock
+# Utilizes OpenCV 5.x with KleidiCV 0.7.0 acceleration on AWS Graviton Neoverse V2
+
+FROM --platform=linux/arm64 public.ecr.aws/amazonlinux/amazonlinux:2023
+
+# Install system dependencies & Arm Performance Libraries prerequisites
+RUN dnf update -y && dnf install -y \
+    python3.11 \
+    python3.11-pip \
+    gcc \
+    gcc-c++ \
+    make \
+    mesa-libGL \
+    glib2 \
+    tar \
+    gzip && \
+    dnf clean all
+
+WORKDIR /app
+
+# Copy dependency requirements
+COPY requirements.txt .
+
+# Install pinned dependencies for ARM64 Graviton
+RUN python3.11 -m pip install --no-cache-dir --upgrade pip && \
+    python3.11 -m pip install --no-cache-dir -r requirements.txt
+
+# Copy backend source & assets
+COPY backend/ ./backend/
+COPY samples/ ./samples/
+
+ENV PYTHONPATH=/app
+ENV ARTIFACTS_DIR=/tmp/shelf_artifacts
+ENV PORT=5050
+
+EXPOSE 5050
+
+# Run FastAPI backend on AWS Graviton
+CMD ["python3.11", "-m", "uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "5050"]

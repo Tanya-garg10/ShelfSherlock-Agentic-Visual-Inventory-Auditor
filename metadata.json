@@ -1,0 +1,6 @@
+{
+  "name": "ShelfSherlock",
+  "description": "Agentic Visual Inventory Auditor — Computer vision that investigates shelf changes, follows evidence, and knows when to ask for a human.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
