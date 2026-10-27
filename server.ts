@@ -59,6 +59,7 @@ async function createServer() {
   app.use('/api', apiProxy);
   app.use('/health', apiProxy);
   app.use('/artifacts', apiProxy);
+  app.use('/samples', express.static(path.join(__dirname, 'samples')));
 
   if (!isProd) {
     const vite = await createViteServer({
